@@ -207,6 +207,7 @@ gridApi.setGridOption("rowData",itemList);
 }
 
 async function fetchData() {
+  let itemList = [];
   let world = worldSelect.value;
   let retType = retainerType.value;
   let items = "";
