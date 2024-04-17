@@ -1,0 +1,232 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Retainer venture optimization for FFXIV">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛏️</text></svg>">
+	<title>FFXIV Retainer Venture Calculator</title>
+  <link href="output.css" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+
+</head>
+<body class="bg-gray-800 text-gray-100 min-h-[100vh] pb-24">
+	<header class="w-4/5 mx-auto md:py-8">
+		<h1 class="my-4 text-4xl"><a href="/">FFXIV Retainer Venture Calculator</a></h1>
+	</header>
+	<section class="w-4/5 mx-auto lg:grid grid-cols-2 gap-4 ">
+		
+		<form class="settings flex flex-col gap-4 md:w-2/3 mb-8 pt-3" action="none">
+			<label class="grid grid-cols-2 gap-4">Item Names
+				<select class="language border bg-gray-800">
+					<option value="en">English</option>
+					<option value="de">Deutsch</option>
+					<option value="fr">Français</option>
+					<option value="ja">日本語</option>
+				</select>
+			</label>
+
+			<label class="grid grid-cols-2 gap-4">World Select
+				<select class="world border bg-gray-800">
+					<option disabled value="JA Datacenter">--JAPANESE DATA CENTER--</option>
+					<optgroup label="Elemental">
+						<option value="elemental">Elemental (DC)</option>
+						<option value="aegis">Aegis</option>
+						<option value="atomos">Atomos</option>
+						<option value="carbuncle">Carbuncle</option>
+						<option value="garuda">Garuda</option>
+						<option value="gungnir">Gungnir</option>
+						<option value="kujata">Kujata</option>
+						<option value="tonberry">Tonberry</option>
+						<option value="typhon">Typhon</option>
+					</optgroup>
+
+					<optgroup label="Gaia">
+						<option value="gaia">Gaia (DC)</option>
+						<option value="alexander">Alexander</option>
+						<option value="bahamut">Bahamut</option>
+						<option value="durandal">Durandal</option>
+						<option value="fenrir">Fenrir</option>
+						<option value="ifrit">Ifrit</option>
+						<option value="ridill">Ridill</option>
+						<option value="tiamat">Tiamat</option>
+						<option value="ultima">Ultima</option>
+					</optgroup>
+
+					<optgroup label="Mana">
+						<option value="mana">Mana (DC)</option>
+						<option value="anima">Anima</option>
+						<option value="asura">Asura</option>
+						<option value="chocobo">Chocobo</option>
+						<option value="hades">Hades</option>
+						<option value="ixion">Ixion</option>
+						<option value="masamune">Masamune</option>
+						<option value="pandaemonium">Pandaemonium</option>
+						<option value="titan">Titan</option>
+					</optgroup>
+
+					<optgroup label="Meteor">
+						<option value="meteor">Meteor (DC)</option>
+						<option value="belias">Belias</option>
+						<option value="mandragora">Mandragora</option>
+						<option value="ramuh">Ramuh</option>
+						<option value="shinryu">Shinryu</option>
+						<option value="unicorn">Unicorn</option>
+						<option value="valefor">Valefor</option>
+						<option value="yojimbo">Yojimbo</option>
+						<option value="zeromus">Zeromus</option>
+					</optgroup>
+
+					<option disabled value="NA Datacenter">--NORTH AMERICAN DATA CENTER--</option>
+					<optgroup label="Aether">
+						<option value="aether">Aether (DC)</option>
+						<option value="adamantoise">Adamantoise</option>
+						<option value="cactuar">Cactuar</option>
+						<option value="faerie">Faerie</option>
+						<option value="gilgamesh">Gilgamesh</option>
+						<option value="jenova">Jenova</option>
+						<option value="midgardsormr">Midgardsormr</option>
+						<option value="sargatanas">Sargatanas</option>
+						<option value="siren">Siren</option>
+					</optgroup>
+					
+					<optgroup label="Crystal">
+						<option value="crystal">Crystal (DC)</option>
+						<option value="balmung">Balmung</option>
+						<option value="brynhildr">Brynhildr</option>
+						<option value="coeurl">Coeurl</option>
+						<option value="diabolos">Diabolos</option>
+						<option value="goblin">Goblin</option>
+						<option value="malboro">Malboro</option>
+						<option value="mateus">Mateus</option>
+						<option value="zalera">Zalera</option>
+					</optgroup>
+					
+					<optgroup label="Primal">
+						<option value="primal">Primal (DC)</option>
+						<option value="behemoth">Behemoth</option>
+						<option value="excalibur">Excalibur</option>
+						<option value="exodus">Exodus</option>
+						<option value="famfrit">Famfrit</option>
+						<option value="hyperion">Hyperion</option>
+						<option value="lamia">Lamia</option>
+						<option value="leviathan">Leviathan</option>
+						<option value="ultros">Ultros</option>
+					</optgroup>
+
+					<option disabled value="EU Datacenter">--EUROPEAN DATA CENTER--</option>
+					<optgroup label="Chaos">
+						<option value="chaos">Chaos (DC)</option>
+						<option value="cerberus">Cerberus</option>
+						<option value="louisoix">Louisoix</option>
+						<option value="moogle">Moogle</option>
+						<option value="omega">Omega</option>
+						<option value="Phantom">Phantom</option>
+						<option value="ragnarok">Ragnarok</option>
+						<option value="Sagittarius">Sagittarius</option>
+						<option value="spriggan">Spriggan</option>
+					</optgroup>
+					
+					<optgroup label="Light">
+						<option value="Light">Light (DC)</option>
+						<option value="Alpha">Alpha</option>
+						<option value="lich">Lich</option>
+						<option value="odin">Odin</option>
+						<option value="phoenix">Phoenix</option>
+						<option value="Raiden">Raiden</option>
+						<option value="shiva">Shiva</option>
+						<option value="twintania">Twintania</option>
+						<option value="zodiark">Zodiark</option>
+					</optgroup>
+
+					<option disabled value="OC Datacenter">--OCEANIAN DATA CENTER--</option>
+					<optgroup label="Materia">
+						<option value="materia">Materia (DC)</option>
+						<option value="bismarck">Bismarck</option>
+						<option value="ravana">Ravana</option>
+						<option value="sephirot">Sephirot</option>
+						<option value="sophia">Sophia</option>
+						<option value="zurvan">Zurvan</option>
+					</optgroup>
+
+					<option disabled value="CH Datacenter">--CHINESE DATA CENTER--</option>
+					<optgroup label="LuXingNiao">
+						<option value="LuXingNiao">LuXingNiao (DC)</option>
+            <option value="HongYuHai">HongYuHai</option>
+            <option value="ShenYiZhiDi">ShenYiZhiDi</option>
+            <option value="LaNuoXiYa">LaNuoXiYa</option>
+            <option value="HuanYingQunDao">HuanYingQunDao</option>
+            <option value="MengYaChi">MengYaChi</option>
+            <option value="YuZhouHeYin">YuZhouHeYin</option>
+            <option value="WoXianXiRan">WoXianXiRan</option>
+            <option value="ChenXiWangZuo">ChenXiWangZuo</option>
+    			</optgroup>
+
+    			<optgroup label="MoGuLi">
+			<option value="MoGuLi">MoGuLi (DC)</option>
+            <option value="BaiYinXiang">BaiYinXiang</option>
+            <option value="BaiJinHuanXiang">BaiJinHuanXiang</option>
+            <option value="ShenQuanHen">ShenQuanHen</option>
+            <option value="ChaoFengTing">ChaoFengTing</option>
+            <option value="LvRenZhanQiao">LvRenZhanQiao</option>
+            <option value="FuXiaoZhiJian">FuXiaoZhiJian</option>
+            <option value="Longchaoshendian">Longchaoshendian</option>
+            <option value="MengYuBaoJing">MengYuBaoJing</option>
+    			</optgroup>
+
+    			<optgroup label="MaoXiaoPang">
+			<option value="MaoXiaoPang">MaoXiaoPang (DC)</option>
+            <option value="ZiShuiZhanQiao">ZiShuiZhanQiao</option>
+            <option value="YanXia">YanXia</option>
+            <option value="JingYuZhuangYuan">JingYuZhuangYuan</option>
+            <option value="MoDuNa">MoDuNa</option>
+            <option value="HaiMaoChaWu">HaiMaoChaWu</option>
+            <option value="RouFengHaiWan">RouFengHaiWan</option>
+            <option value="HuPoYuan">HuPoYuan</option>
+			    </optgroup>
+
+			    <optgroup label="DouDouChai">
+			<option value="DouDouChai">DouDouChai (DC)</option>
+            <option value="ShuiJingTa">ShuiJingTa</option>
+            <option value="YinLeiHu">YinLeiHu</option>
+            <option value="TaiYangHaiAn">TaiYangHaiAn</option>
+            <option value="YiXiuJiaDe">YiXiuJiaDe</option>
+            <option value="HongChaChuan">HongChaChuan</option>
+            <option value="HuangJinGu">HuangJinGu</option>
+            <option value="YueYaWan">YueYaWan</option>
+            <option value="XueSongYuan">XueSongYuan</option>
+			    </optgroup>
+				</select>
+			</label>
+
+			<label class="grid grid-cols-2 gap-4">Retainer Type
+				<select class="retainer-type border bg-gray-800">
+					<option value="bot">Botanist</option>
+					<option value="fsh">Fisher</option>
+					<option value="hnt">Hunter</option>
+					<option value="min">Miner</option>
+				</select>
+			</label>
+
+			<label class="grid grid-cols-2 gap-4">Perception/iLvl
+				<input type="number" class="retainer-level border bg-gray-800 pl-1" value="0">
+			</label>
+
+			<button class="fetch border inline-block hover:bg-gray-700">Fetch</button>
+		</form>
+
+	</section>
+
+
+<section class="w-4/5 mx-auto mt-8">
+	
+	<div id="myGrid" class="ag-theme-quartz-dark" style="width: 100%; height: 100%"></div>
+
+</section>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
