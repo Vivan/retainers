@@ -114,10 +114,10 @@ function updateTable(rawData, retType) {
     let id = Object.values(tableData.items)[i].itemID;
     let lvl = getItemLvl(id);
     let name = getItemName(id);
-    let minPrice = Object.values(tableData.items)[i].minPrice;
-    let averagePrice = Object.values(tableData.items)[i].averagePrice;
-    let unitsSold = Object.values(tableData.items)[i].unitsSold;
-    let recentHistoryCount = Object.values(tableData.items)[i].recentHistoryCount;
+ //   let minPrice = Object.values(tableData.items)[i].minPrice;
+ //  let averagePrice = Object.values(tableData.items)[i].averagePrice;
+ //   let unitsSold = Object.values(tableData.items)[i].unitsSold;
+ //   let recentHistoryCount = Object.values(tableData.items)[i].recentHistoryCount;
 //    let totalCostOfSales = Object.values(tableData.items)[i].recentHistory.reduce((sum, listing) => sum + listing.pricePerUnit,0);
 //    let averagePricePerUnit = totalCostOfSales / Object.values(tableData.items)[i].recentHistory.length;
 
@@ -138,7 +138,7 @@ function updateTable(rawData, retType) {
 */
 // Sort listings by pricePerUnit
 
-let pricesHistory =  Object.values(tableData.items)[i].recentHistory.map(listing =>({ pricePerUnit: listing.pricePerUnit, quantity: listing.quantity}));
+let pricesHistory =  Object.values(tableData.items)[i].entries.map(listing =>({ pricePerUnit: listing.pricePerUnit, quantity: listing.quantity}));
 pricesHistory.sort((a, b) => a.pricePerUnit - b.pricePerUnit);
 
 // Calculate total items sold
@@ -236,7 +236,7 @@ async function fetchData() {
 
   // build the promise array, the resp.json() had to be here to work
   const calls = itemsSlice.map((slice) =>
-    fetch(`${endpoint}/${world}/${slice}?entries=50`).then((resp) => resp.json())
+    fetch(`${endpoint}/history/${world}/${slice}?maxSalePrice=5000`).then((resp) => resp.json())
   );
   // get the promise results into new array
   const responses = await Promise.all(calls)
